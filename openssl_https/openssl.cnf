@@ -1,0 +1,7 @@
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+DNS.2 = www.jiajie.com
+DNS.3 = hs.jiajie.com

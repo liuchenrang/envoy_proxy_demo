@@ -1,0 +1,14 @@
+node:
+  id: id_1
+  cluster: test
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address: { address: 127.0.0.1, port_value: 9901 }
+dynamic_resources:
+  lds_config: 
+    path: "/Users/chen/IdeaProjects/envoy-gate/xds/lds/lds.yaml"
+  # eds_config: 
+  #   path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yml"
+  cds_config: 
+    path: "/Users/chen/IdeaProjects/envoy-gate/xds/cds/cds.yaml"

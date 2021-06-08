@@ -1,0 +1,12 @@
+version_info: "0"
+resources:
+- "@type": type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment
+  cluster_name: some_service
+
+  endpoints:
+  - lb_endpoints:
+    - endpoint:
+        address:
+          socket_address:
+            address: portal.caisejingyu.com
+            port_value: 80

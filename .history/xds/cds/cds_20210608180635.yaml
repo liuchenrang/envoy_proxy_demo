@@ -1,0 +1,18 @@
+version_info: "1"
+resources:
+  - name: targetCluster
+    connect_timeout: 0.25s
+    lb_policy: ROUND_ROBIN
+    type: EDS
+    eds_cluster_config:
+      service_name: localservices
+      eds_config:
+        path: /Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml
+  # - name: some_service
+  #   "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+  #   connect_timeout: 0.25s
+  #   lb_policy: ROUND_ROBIN
+  #   type: EDS
+  #   eds_cluster_config:
+  #     eds_config:
+  #       path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml"

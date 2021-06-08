@@ -1,0 +1,12 @@
+version_info: "0"
+resources:
+- "@type": type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment
+  endpoints:
+
+  - lb_endpoints:
+      - endpoint:
+          cluster_name: "ddd"
+          address:
+            socket_address:
+              address: www.baidu.com
+              port_value: 443

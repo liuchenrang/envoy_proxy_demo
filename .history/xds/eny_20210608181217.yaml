@@ -1,0 +1,27 @@
+node:
+  id: id_1
+  cluster: test
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address: { address: 127.0.0.1, port_value: 9901 }
+dynamic_resources:
+  lds_config: 
+    path: "/Users/chen/IdeaProjects/envoy-gate/xds/lds/lds.yaml"
+  # eds_config: 
+  #   path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml"
+  cds_config: 
+    path: "/Users/chen/IdeaProjects/envoy-gate/xds/cds/cds.yaml"
+ 
+
+layered_runtime:
+  layers:
+  - name: static_layer_0
+        static_layer:
+          envoy:
+            resource_limits:
+              listener:
+                example_listener_name:
+                  connection_limit:10000
+          overload:
+            global_downstream_max_connections:50000

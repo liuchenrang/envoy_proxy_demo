@@ -1,0 +1,12 @@
+version_info: "0"
+resources:
+  - name: some_service
+    "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+    connect_timeout: 0.25s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
+    transport_socket:
+      name: envoy.transport_sockets.tls
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+    
