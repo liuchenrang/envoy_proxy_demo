@@ -1,9 +1,0 @@
-version_info: "0"
-resources:
-  - name: some_service
-    connect_timeout: 0.25s
-    lb_policy: ROUND_ROBIN
-    type: EDS
-    eds_cluster_config:
-      eds_config:
-        path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml"
