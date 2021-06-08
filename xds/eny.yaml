@@ -8,8 +8,6 @@ admin:
 dynamic_resources:
   lds_config: 
     path: "/Users/chen/IdeaProjects/envoy-gate/xds/lds/lds.yaml"
-  # eds_config: 
-  #   path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml"
   cds_config: 
     path: "/Users/chen/IdeaProjects/envoy-gate/xds/cds/cds.yaml"
  
