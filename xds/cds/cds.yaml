@@ -31,6 +31,14 @@ resources:
   "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
   connect_timeout: 0.25s
   type: STRICT_DNS
+  health_checks:
+    - timeout: 4s
+      interval: 3s
+      healthy_threshold: 5
+      unhealthy_threshold: 3
+      http_health_check:
+        host: 127.0.0.1
+        path: /xds.yaml
   lb_policy: ROUND_ROBIN
   load_assignment:
     cluster_name: baidu_service
@@ -38,12 +46,18 @@ resources:
     - lb_endpoints:
       - load_balancing_weight: 3
         endpoint:
+          health_check_config: 
+            port_value: 9992
+            hostname: 127.0.0.1
           address:
             socket_address:
               address: 127.0.0.1
               port_value: 9992
       - load_balancing_weight: 100
         endpoint:
+          health_check_config: 
+            port_value: 9991
+            hostname: 127.0.0.1
           address:
             socket_address:
               address: 127.0.0.1
