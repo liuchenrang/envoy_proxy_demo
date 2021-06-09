@@ -7,3 +7,21 @@ resources:
   eds_cluster_config:
     eds_config:
       path: "/Users/chen/IdeaProjects/envoy-gate/xds/eds/eds.yaml"
+- name: baidu_service
+  "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+  connect_timeout: 0.25s
+  type: STRICT_DNS
+  lb_policy: ROUND_ROBIN
+  transport_socket:
+    name: envoy.transport_sockets.tls
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+  load_assignment:
+    cluster_name: baidu_service
+    endpoints:
+    - lb_endpoints:
+      - endpoint:
+          address:
+            socket_address:
+              address: www.baidu.com
+              port_value: 443

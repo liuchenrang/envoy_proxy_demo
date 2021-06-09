@@ -39,3 +39,11 @@ resources:
                   cluster: some_service
                   host_rewrite_literal: xman.translink.xiaoshijie.com
                   idle_timeout: 15s # must be disabled for long-lived 
+            - name: baidu
+              domains: "www.jiajie.com"
+              routes:
+              - match: { prefix: "/" }
+                route:
+                  cluster: baidu_service
+                  host_rewrite_literal: www.baidu.com
+                  idle_timeout: 15s # must be disabled for long-lived 
