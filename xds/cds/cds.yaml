@@ -20,8 +20,31 @@ resources:
     cluster_name: baidu_service
     endpoints:
     - lb_endpoints:
-      - endpoint:
+      - load_balancing_weight: 100
+        endpoint:
           address:
             socket_address:
-              address: www.baidu.com
+              address: www.lanlanlife.com
               port_value: 443
+
+- name: weight_service
+  "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+  connect_timeout: 0.25s
+  type: STRICT_DNS
+  lb_policy: ROUND_ROBIN
+  load_assignment:
+    cluster_name: baidu_service
+    endpoints:
+    - lb_endpoints:
+      - load_balancing_weight: 3
+        endpoint:
+          address:
+            socket_address:
+              address: 127.0.0.1
+              port_value: 9992
+      - load_balancing_weight: 100
+        endpoint:
+          address:
+            socket_address:
+              address: 127.0.0.1
+              port_value: 9991
