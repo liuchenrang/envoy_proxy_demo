@@ -33,12 +33,15 @@ resources:
   type: STRICT_DNS
   health_checks:
     - timeout: 4s
-      interval: 3s
+      interval: 5s
       healthy_threshold: 5
       unhealthy_threshold: 3
       http_health_check:
         host: 127.0.0.1
         path: /xds.yaml
+        expected_statuses: 
+            start: 200
+            end: 201
   lb_policy: ROUND_ROBIN
   load_assignment:
     cluster_name: baidu_service
@@ -62,3 +65,16 @@ resources:
             socket_address:
               address: 127.0.0.1
               port_value: 9991
+
+# - name: redis_cluster
+#   type: static 
+#   lb_policy: MAGLEV
+#   load_assignment:
+#     cluster_name: redis_cluster
+#     endpoints:
+#     - lb_endpoints:
+#       - endpoint:
+#           address:
+#             socket_address:
+#               address: 172.16.16.28 
+#               port_value: 8181
