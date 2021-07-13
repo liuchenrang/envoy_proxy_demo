@@ -1,0 +1,19 @@
+resources:
+- "@type": type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment
+  cluster_name: mac_service
+
+    transport_socket:
+        name: envoy.transport_sockets.tls
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain: { filename: "/etc/letsencrypt/live/mac.ddapp.wang/fullchain.pem" }
+              private_key: { filename: "/etc/letsencrypt/live/mac.ddapp.wang/privkey.pem" }   
+  endpoints:
+  - lb_endpoints:
+    - endpoint:
+        address:
+          socket_address:
+            address: 127.0.0.1
+            port_value: 9991

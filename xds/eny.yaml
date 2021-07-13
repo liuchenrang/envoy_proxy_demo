@@ -12,8 +12,6 @@ dynamic_resources:
   cds_config: 
     resource_api_version: V3
     path: "/Users/chen/IdeaProjects/envoy-gate/xds/cds/cds.yaml"
- 
-
 layered_runtime:
   layers:
   - name: static_layer_0

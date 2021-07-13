@@ -52,14 +52,6 @@ resources:
     address:
       socket_address: { address: 0.0.0.0, port_value: 443 }
     filter_chains:
-      transport_socket:
-        name: envoy.transport_sockets.tls
-        typed_config:
-          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
-          common_tls_context:
-            tls_certificates:
-            - certificate_chain: { filename: "/Users/chen/IdeaProjects/openssl_https/server.crt" }
-              private_key: { filename: "/Users/chen/IdeaProjects/openssl_https/server.key" }
       filters:
       - name: envoy.http_connection_manager
         typed_config:
@@ -79,16 +71,23 @@ resources:
           - name: envoy.filters.http.router
           route_config:
             virtual_hosts:
-            - name: default
-              domains: "*" 
-              
+            - name: mac
+              domains: "*.mac.ddapp.wang" 
               routes: 
               - match: { prefix: "/" }
                 route:
-                  cluster: weight_service
+                  cluster: mac_service
                   # host_rewrite_literal: www.baidu.com
+                  idle_timeout: 15s # must be disabled for long-lived   
+            - name: baidu
+              domains: "*" 
+              routes: 
+              - match: { prefix: "/" }
+                route:
+                  cluster: baidu_service
+                  host_rewrite_literal: www.baidu.com
                   idle_timeout: 15s # must be disabled for long-lived 
-
+           
   # - name: listener_redis
   #   "@type": type.googleapis.com/envoy.config.listener.v3.Listener
   #   address:

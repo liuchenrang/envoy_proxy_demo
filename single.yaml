@@ -9,7 +9,7 @@ static_resources:
     address:
       socket_address: { address: 0.0.0.0, port_value: 443 }
     filter_chains:
-       transport_socket:
+      transport_socket:
         name: envoy.transport_sockets.tls
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
@@ -33,19 +33,19 @@ static_resources:
           stream_idle_timeout: 300s # 5 mins, must be disabled for long-lived and streaming requests
           request_timeout: 300s # 5 mins, must be disabled for long-lived and streaming requests
           http_filters:
-          - name: envoy.router
+          - name: envoy.filters.http.router
           route_config:
             virtual_hosts:
-            - name: default
-              domains: "*"
+            - name: baidu
+              domains: "www.jiajie.com"
               routes:
               - match: { prefix: "/" }
                 route:
-                  cluster: some_service
+                  cluster: baidu_service
                   host_rewrite_literal: www.baidu.com
                   idle_timeout: 15s # must be disabled for long-lived 
   clusters:
-  - name: some_service
+  - name: baidu_service
     connect_timeout: 0.25s
     type: STRICT_DNS
     lb_policy: ROUND_ROBIN
@@ -55,7 +55,7 @@ static_resources:
         "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
     
     load_assignment:
-      cluster_name: some_service
+      cluster_name: baidu_service
       endpoints:
       - lb_endpoints:
         - endpoint:
